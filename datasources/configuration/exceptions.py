@@ -1,0 +1,2 @@
+class UnknownConfigurationFileTypeException(Exception):
+    pass
