@@ -1,2 +1,0 @@
-class InvalidConfigurationFileException(Exception):
-    pass
