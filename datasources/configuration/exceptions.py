@@ -1,2 +1,0 @@
-class UnknownConfigurationFileTypeException(Exception):
-    pass
