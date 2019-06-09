@@ -1,0 +1,2 @@
+class UnknownResponseFormat(Exception):
+    pass
