@@ -2,13 +2,12 @@ import unittest
 from unittest.mock import MagicMock
 
 from entities.screen.screen import Screen
-from usecases.screen.databuilder import ScreenDataBuilder
+from presenters.screen.databuilder import ScreenDataBuilder
 
 
 class TestScreenDataBuilder(unittest.TestCase):
     def test_build_data_when_screen_is_correct(self):
         wanted = {
-            "name": "Test environment",
             "url": "test.fr",
             "status": "OK",
             "data": {'commit': '4f55721f0bb', 'version': '1.4.7'},
@@ -25,13 +24,36 @@ class TestScreenDataBuilder(unittest.TestCase):
         }
 
         given_screen = Screen()
-        given_screen.set_name("Test environment")
         given_screen.set_url("test.fr")
         given_screen.set_format("json")
         given_screen.set_data(["commit", "version"])
         given_screen.set_main_information("{version}-{commit}")
 
-        print(given_screen.get_data())
+        screen_databuilder = ScreenDataBuilder()
+        screen_databuilder.call_endpoint = MagicMock(return_value=given_endpoint_return)
+
+        result = screen_databuilder.build_data(given_screen)
+
+        self.assertEqual(wanted, result)
+
+    def test_build_data_when_answer_is_incorrect(self):
+        wanted = {
+            "url": "nowhere.fr",
+            "status": "KO",
+            "data": {},
+            "main_information": "N/A"
+        }
+
+        given_endpoint_return = {
+            "status_code": 404,
+            "body": {}
+        }
+
+        given_screen = Screen()
+        given_screen.set_url("nowhere.fr")
+        given_screen.set_format("json")
+        given_screen.set_data(["commit", "version"])
+        given_screen.set_main_information("{version}-{commit}")
 
         screen_databuilder = ScreenDataBuilder()
         screen_databuilder.call_endpoint = MagicMock(return_value=given_endpoint_return)

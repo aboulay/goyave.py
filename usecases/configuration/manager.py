@@ -32,17 +32,20 @@ class ConfigurationManager():
         return data
 
     def validate_configuration(self, configuration):
-        if not configuration.get('targets'):
+        if not configuration.get('environments'):
             raise InvalidConfigurationFileException()
-        for target in configuration['targets']:
-            if not target.get('name'):
+        for environment in configuration['environments']:
+            if not environment.get('name'):
                 raise InvalidConfigurationFileException()
-            if not target.get('url'):
+            if not environment.get('screens'):
                 raise InvalidConfigurationFileException()
-            if not target.get('format'):
-                raise InvalidConfigurationFileException()
-            if (not target.get('data') or
-                    target['data'] is None):
-                raise InvalidConfigurationFileException()
-            if not target.get('main'):
-                raise InvalidConfigurationFileException()
+            for screen in environment['screens']:
+                if not screen.get('url'):
+                    raise InvalidConfigurationFileException()
+                if not screen.get('format'):
+                    raise InvalidConfigurationFileException()
+                if (not screen.get('data') or
+                        screen['data'] is None):
+                    raise InvalidConfigurationFileException()
+                if not screen.get('main'):
+                    raise InvalidConfigurationFileException()

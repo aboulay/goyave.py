@@ -1,6 +1,6 @@
 import requests
 
-from usecases.screen.exceptions import UnknownResponseFormat
+from presenters.screen.exceptions import UnknownResponseFormat
 
 STATUS_OK = "OK"
 STATUS_FAILED = "KO"
@@ -11,9 +11,9 @@ class ScreenDataBuilder():
     def build_data(self, screen):
         response = self.call_endpoint(screen.get_url(), screen.get_format())
         if response["status_code"] != 200:
-            build = self.build_error_answer(screen, response["body"])
+            build = self.__build_error_answer(screen, response["body"])
         else:
-            build = self.build_ok_answer(screen, response["body"])
+            build = self.__build_ok_answer(screen, response["body"])
         return build
 
     def call_endpoint(self, url, format):
@@ -25,20 +25,18 @@ class ScreenDataBuilder():
             "body": response.json()
         }
 
-    def build_error_answer(self, screen, response_body):
+    def __build_error_answer(self, screen, response_body):
         build = {
-            "name": screen.get_name(),
             "url": screen.get_url(),
             "status": STATUS_FAILED,
-            "data": [],
+            "data": {},
             "main_information": INFORMATION_MISSING
         }
         return build
 
-    def build_ok_answer(self, screen, response_body):
+    def __build_ok_answer(self, screen, response_body):
         processed_data = self.__handle_data(screen, response_body)
         build = {
-            "name": screen.get_name(),
             "url": screen.get_url(),
             "status": STATUS_OK,
             "data": processed_data,

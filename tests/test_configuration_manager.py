@@ -10,17 +10,21 @@ from usecases.configuration.exceptions \
 
 class TestConfigurationManager(unittest.TestCase):
     def test_parser_when_data_are_correct_it_should_return_data(self):
-        wanted = {'targets': [
-            {
-                'name': 'Demo environment',
-                'url': 'test.fr',
-                'format': 'json',
-                'data': [
-                    "commit", "version"
-                   ],
-                'main': '{commit}-{version}'
-            }
-        ]}
+        wanted = {
+            'environments': [
+                {
+                    'name': 'Demo',
+                    'screens': [
+                        {
+                            'url': 'test.fr',
+                            'format': 'json',
+                            'data': ["commit", "version"],
+                            'main': '{commit}-{version}'
+                        }
+                    ]
+                }
+            ]
+        }
         configuration_manager = ConfigurationManager("dummy.yml")
         configuration_manager.read_configuration = MagicMock(return_value=wanted)
         configuration_manager.parse_configuration()
@@ -30,26 +34,62 @@ class TestConfigurationManager(unittest.TestCase):
         self.assertEqual(wanted, result)
 
     def test_parser_when_there_is_more_than_one_endpoint(self):
-        wanted = {'targets': [
-            {
-                'name': 'Test1 environment',
-                'url': 'test1.fr',
-                'format': 'json',
-                'data': [
-                    "commit", "version"
-                   ],
-                'main': '{commit}-{version}'
-            },
-            {
-                'name': 'Test2 environment',
-                'url': 'test2.fr',
-                'format': 'json',
-                'data': [
-                    "commit", "version"
-                   ],
-                'main': '{commit}-{version}'
-            }
-        ]}
+        wanted = {
+            'environments': [
+                {
+                    'name': 'Demo',
+                    'screens': [
+                        {
+                            'url': 'test.fr',
+                            'format': 'json',
+                            'data': ["commit", "version"],
+                            'main': '{commit}-{version}'
+                        },
+                        {
+                            'url': 'test2.fr',
+                            'format': 'json',
+                            'data': ["commit", "version"],
+                            'main': '{commit}-{version}'
+                        }
+                    ]
+                }
+            ]
+        }
+        configuration_manager = ConfigurationManager("dummy.yml")
+        configuration_manager.read_configuration = MagicMock(return_value=wanted)
+        configuration_manager.parse_configuration()
+
+        result = configuration_manager.get_configuration()
+
+        self.assertEqual(wanted, result)
+    
+    def test_parser_when_there_is_multiples_environments(self):
+        wanted = {
+            'environments': [
+                {
+                    'name': 'Demo',
+                    'screens': [
+                        {
+                            'url': 'test.fr',
+                            'format': 'json',
+                            'data': ["commit", "version"],
+                            'main': '{commit}-{version}'
+                        }
+                    ]
+                },
+                {
+                    'name': 'Production',
+                    'screens': [
+                        {
+                            'url': 'test.fr',
+                            'format': 'json',
+                            'data': ["commit", "version"],
+                            'main': '{commit}-{version}'
+                        }
+                    ]
+                }
+            ]
+        }
         configuration_manager = ConfigurationManager("dummy.yml")
         configuration_manager.read_configuration = MagicMock(return_value=wanted)
         configuration_manager.parse_configuration()
@@ -59,14 +99,20 @@ class TestConfigurationManager(unittest.TestCase):
         self.assertEqual(wanted, result)
 
     def test_parser_when_data_are_invalid(self):
-        wanted = {'targets': [
-            {
-                'name': 'Demo environment',
-                'url': 'test.fr',
-                'format': 'json',
-                'main': '{commit}-{version}'
-            }
-        ]}
+        wanted = {
+            'environments': [
+                {
+                    'name': 'Demo',
+                    'screens': [
+                        {
+                            'url': 'test.fr',
+                            'format': 'json',
+                            'main': '{commit}-{version}'
+                        }
+                    ]
+                }
+            ]
+        }
         configuration_manager = ConfigurationManager("dummy.yml")
         configuration_manager.read_configuration = MagicMock(return_value=wanted)
 
