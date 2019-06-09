@@ -1,6 +1,6 @@
 import requests
 
-from presenters.screen.exceptions import UnknownResponseFormat
+from usecases.screen.exceptions import UnknownResponseFormat
 
 STATUS_OK = "OK"
 STATUS_FAILED = "KO"

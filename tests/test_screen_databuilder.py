@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 
 from entities.screen.screen import Screen
-from presenters.screen.databuilder import ScreenDataBuilder
+from usecases.screen.databuilder import ScreenDataBuilder
 
 
 class TestScreenDataBuilder(unittest.TestCase):

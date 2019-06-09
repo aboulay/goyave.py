@@ -25,12 +25,10 @@ class TestEnvironmentManager(unittest.TestCase):
         wanted_screen_format = "json"
         wanted_screen_main_information = "{commit}-{version}"
         environments_manager = EnvironmentsManager("dummy.yml")
-        environments_manager.configuration_manager.parse_configuration = MagicMock(return_value="")
+        environments_manager.configuration_manager.parse_configuration = MagicMock()
         environments_manager.configuration_manager.get_configuration = MagicMock(return_value=given_configuration)
 
-        environments_manager.load_environments()
-
-        result = environments_manager.get_environment_list()
+        result = environments_manager.load_environments()
 
         first_environment = result[0]
         self.assertEqual(wanted_environment_name, first_environment.get_name())
@@ -73,12 +71,10 @@ class TestEnvironmentManager(unittest.TestCase):
         wanted_environment_1_screen_0_url = "demo.env.fr"
         wanted_environment_1_screen_0_format = "json"
         environments_manager = EnvironmentsManager("dummy.yml")
-        environments_manager.configuration_manager.parse_configuration = MagicMock(return_value="")
+        environments_manager.configuration_manager.parse_configuration = MagicMock()
         environments_manager.configuration_manager.get_configuration = MagicMock(return_value=given_configuration)
 
-        environments_manager.load_environments()
-
-        result = environments_manager.get_environment_list()
+        result = environments_manager.load_environments()
 
         first_environment = result[0]
         second_environment = result[1]
