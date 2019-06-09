@@ -1,6 +1,6 @@
 from usecases.screen.manager import ScreensManager
 from usecases.configuration.manager import ConfigurationManager
-from entities.environment.environment import Environment
+from entities.environment import Environment
 
 
 class EnvironmentsManager():

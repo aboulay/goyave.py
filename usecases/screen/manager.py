@@ -1,4 +1,4 @@
-from entities.screen.screen import Screen
+from entities.screen import Screen
 
 
 class ScreensManager():

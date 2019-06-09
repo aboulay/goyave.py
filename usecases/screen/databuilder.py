@@ -8,7 +8,7 @@ INFORMATION_MISSING = "N/A"
 
 
 class ScreenDataBuilder():
-    def build_data(self, screen):
+    def build(self, screen):
         response = self.call_endpoint(screen.get_url(), screen.get_format())
         if response["status_code"] != 200:
             build = self.__build_error_answer(screen, response["body"])

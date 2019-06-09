@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from entities.screen.screen import Screen
+from entities.screen import Screen
 from usecases.screen.databuilder import ScreenDataBuilder
 
 
@@ -32,7 +32,7 @@ class TestScreenDataBuilder(unittest.TestCase):
         screen_databuilder = ScreenDataBuilder()
         screen_databuilder.call_endpoint = MagicMock(return_value=given_endpoint_return)
 
-        result = screen_databuilder.build_data(given_screen)
+        result = screen_databuilder.build(given_screen)
 
         self.assertEqual(wanted, result)
 
@@ -58,6 +58,6 @@ class TestScreenDataBuilder(unittest.TestCase):
         screen_databuilder = ScreenDataBuilder()
         screen_databuilder.call_endpoint = MagicMock(return_value=given_endpoint_return)
 
-        result = screen_databuilder.build_data(given_screen)
+        result = screen_databuilder.build(given_screen)
 
         self.assertEqual(wanted, result)

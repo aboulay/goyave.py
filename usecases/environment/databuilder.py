@@ -2,7 +2,7 @@ from usecases.screen.databuilder import ScreenDataBuilder
 
 
 class EnvironmentDataBuilder():
-    def build_environment(self, environment):
+    def build(self, environment):
         build = {
             "name": environment["name"]
         }
@@ -10,7 +10,7 @@ class EnvironmentDataBuilder():
         screen_list = []
 
         for screen in environment.get_screen_list:
-            screen_list.append(screen_builder.build_data(screen))
+            screen_list.append(screen_builder.build(screen))
 
         build["screens"] = screen_list
         return build
