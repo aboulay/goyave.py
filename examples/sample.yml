@@ -1,0 +1,10 @@
+environments:
+  - name: 'Production'
+    screens:
+      - name: 'test.fr'
+        url: 'http://test.fr/version'
+        format: 'json'
+        data:
+          - 'version'
+          - 'commit'
+        main: '{version}-{commit}'
