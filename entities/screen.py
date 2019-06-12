@@ -1,9 +1,16 @@
 class Screen():
     def __init__(self):
+        self.name = ""
         self.url = ""
         self.format = ""
         self.data = []
         self.main_information = ""
+
+    def get_name(self):
+        return self.name
+
+    def set_name(self, name):
+        self.name = name
 
     def get_url(self):
         return self.url

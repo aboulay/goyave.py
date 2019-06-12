@@ -17,16 +17,23 @@ class ScreenDataBuilder():
         return build
 
     def call_endpoint(self, url, format):
-        response = requests.get(url)
-        if format != "json":
-            raise UnknownResponseFormat()
-        return {
-            "status_code": response.status_code,
-            "body": response.json()
-        }
+        try:
+            response = requests.get(url)
+            if format != "json":
+                raise UnknownResponseFormat()
+            return {
+                "status_code": response.status_code,
+                "body": response.json()
+            }
+        except Exception:
+            return {
+                "status_code": 404,
+                "body": ""
+            }
 
     def __build_error_answer(self, screen, response_body):
         build = {
+            "name": screen.get_name(),
             "url": screen.get_url(),
             "status": STATUS_FAILED,
             "data": {},
@@ -37,6 +44,7 @@ class ScreenDataBuilder():
     def __build_ok_answer(self, screen, response_body):
         processed_data = self.__handle_data(screen, response_body)
         build = {
+            "name": screen.get_name(),
             "url": screen.get_url(),
             "status": STATUS_OK,
             "data": processed_data,

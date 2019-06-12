@@ -5,7 +5,7 @@ from controllers.interfaces import IController
 class EnvironmentController(IController):
     def __init__(self, configuration_file):
         self.configuration_file = configuration_file
-        self.reload_environment()
+        self.reload()
 
     def reload(self):
         self.environment_manager = EnvironmentsManager(self.configuration_file)
