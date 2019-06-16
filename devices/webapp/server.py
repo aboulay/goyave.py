@@ -29,7 +29,7 @@ class FlaskAppWrapper(object):
 
 
 class WebServer():
-    def __init__(self, configuration_file, refresh_time=10):
+    def __init__(self, configuration_file, refresh_time=30):
         controller = EnvironmentController(configuration_file)
         self.environments = controller.get_data()
         self.presenter = EnvironmentPresenter()
@@ -41,7 +41,9 @@ class WebServer():
 
     def __index(self):
         environments = self.presenter.presents(self.environments)
-        return render_template('index.html', environments=environments)
+        return render_template('index.html',
+                               environments=environments,
+                               refresh_time=self.refresh_time)
 
     def run(self):
         self.app_server.run()
