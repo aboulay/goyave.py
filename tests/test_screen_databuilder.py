@@ -8,6 +8,7 @@ from usecases.screen.databuilder import ScreenDataBuilder
 class TestScreenDataBuilder(unittest.TestCase):
     def test_build_data_when_screen_is_correct(self):
         wanted = {
+            'name': 'test',
             "url": "test.fr",
             "status": "OK",
             "data": {'commit': '4f55721f0bb', 'version': '1.4.7'},
@@ -24,6 +25,7 @@ class TestScreenDataBuilder(unittest.TestCase):
         }
 
         given_screen = Screen()
+        given_screen.set_name('test')
         given_screen.set_url("test.fr")
         given_screen.set_format("json")
         given_screen.set_data(["commit", "version"])
@@ -38,6 +40,7 @@ class TestScreenDataBuilder(unittest.TestCase):
 
     def test_build_data_when_answer_is_incorrect(self):
         wanted = {
+            "name": 'test',
             "url": "nowhere.fr",
             "status": "KO",
             "data": {},
@@ -50,6 +53,7 @@ class TestScreenDataBuilder(unittest.TestCase):
         }
 
         given_screen = Screen()
+        given_screen.set_name('test')
         given_screen.set_url("nowhere.fr")
         given_screen.set_format("json")
         given_screen.set_data(["commit", "version"])

@@ -16,6 +16,7 @@ class TestConfigurationManager(unittest.TestCase):
                     'name': 'Demo',
                     'screens': [
                         {
+                            'name': 'test',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["commit", "version"],
@@ -40,12 +41,14 @@ class TestConfigurationManager(unittest.TestCase):
                     'name': 'Demo',
                     'screens': [
                         {
+                            'name': 'test',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["commit", "version"],
                             'main': '{commit}-{version}'
                         },
                         {
+                            'name': 'test2',
                             'url': 'test2.fr',
                             'format': 'json',
                             'data': ["commit", "version"],
@@ -70,6 +73,7 @@ class TestConfigurationManager(unittest.TestCase):
                     'name': 'Demo',
                     'screens': [
                         {
+                            'name': 'testdemo',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["commit", "version"],
@@ -81,6 +85,7 @@ class TestConfigurationManager(unittest.TestCase):
                     'name': 'Production',
                     'screens': [
                         {
+                            'name': 'testprod',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["commit", "version"],
@@ -105,6 +110,7 @@ class TestConfigurationManager(unittest.TestCase):
                     'name': 'Demo',
                     'screens': [
                         {
+                            'name': 'test',
                             'url': 'test.fr',
                             'format': 'json',
                             'main': '{commit}-{version}'

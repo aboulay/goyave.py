@@ -11,6 +11,7 @@ class TestEnvironmentManager(unittest.TestCase):
                     "name": "Test",
                     "screens": [
                         {
+                            'name': 'test',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["version", "commit"],
@@ -21,6 +22,7 @@ class TestEnvironmentManager(unittest.TestCase):
             ]
         }
         wanted_environment_name = "Test"
+        wanted_screen_name = "test"
         wanted_screen_url = "test.fr"
         wanted_screen_format = "json"
         wanted_screen_main_information = "{commit}-{version}"
@@ -35,6 +37,7 @@ class TestEnvironmentManager(unittest.TestCase):
 
         first_screen = first_environment.get_screen_list()[0]
         self.assertEqual(wanted_screen_url, first_screen.get_url())
+        self.assertEqual(wanted_screen_name, first_screen.get_name())
         self.assertEqual(wanted_screen_format, first_screen.get_format())
         self.assertEqual(wanted_screen_main_information, first_screen.get_main_information())
 
@@ -44,6 +47,7 @@ class TestEnvironmentManager(unittest.TestCase):
                     "name": "Test",
                     "screens": [
                         {
+                            'name': 'test',
                             'url': 'test.fr',
                             'format': 'json',
                             'data': ["version", "commit"],
@@ -55,6 +59,7 @@ class TestEnvironmentManager(unittest.TestCase):
                     "name": "Demo",
                     "screens": [
                         {
+                            'name': 'testdemo',
                             'url': 'demo.env.fr',
                             'format': 'json',
                             'data': ["version", "commit"],
@@ -68,6 +73,7 @@ class TestEnvironmentManager(unittest.TestCase):
         wanted_environment_0_screen_0_url = "test.fr"
         wanted_environment_0_screen_0_format = "json"
         wanted_environment_1_name = "Demo"
+
         wanted_environment_1_screen_0_url = "demo.env.fr"
         wanted_environment_1_screen_0_format = "json"
         environments_manager = EnvironmentsManager("dummy.yml")
